@@ -1,0 +1,8 @@
+scala_webapp:
+  container_name: scala_webapp
+  build: .
+  volumes:
+    - ../scala_webapp:/opt/scala
+  ports:
+    - "9000:9000" 
+  tty: true
