@@ -1,0 +1,19 @@
+{
+  "name": "mojipic",
+  "version": "1.0.0",
+  "description": "Web front client for mojipic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suaaa7/scala_webapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suaaa7/scala_webapp/issues"
+  },
+  "homepage": "https://github.com/suaaa7/scala_webapp#readme"
+}

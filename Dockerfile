@@ -24,4 +24,8 @@ RUN yum -y install sbt
 RUN mkdir -p /opt/scala
 WORKDIR /opt/scala
 
+# nodejs
+RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash -
+RUN yum -y install nodejs
+
 CMD ["/bin/bash"]
