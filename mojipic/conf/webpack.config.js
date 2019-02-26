@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: './app/views/index.js',
-  mode: 'none'
+  mode: 'none',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, '../public/javascripts')
@@ -28,4 +28,3 @@ module.exports = {
   },
   devtool: 'source-map'
 };
-
