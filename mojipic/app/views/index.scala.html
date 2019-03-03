@@ -42,7 +42,10 @@
         </div>
         <div class="row center">
             <div class="col s12 blue z-depth-5">
-                <h2 class="blue-text text-lighten-5"> ドロップエリア </h2>
+                <form action="/pictures" class="dropzone" id="filedropzone">
+                    <h2 class="blue-text text-lighten-5"> ドロップエリア </h2>+                    <input type="hidden" id="overlaytext" name="overlaytext">
+                    <input type="hidden" id="overlaytextsize" name="overlaytextsize">
+                </form>            
             </div>
         </div>
         <br><br>
