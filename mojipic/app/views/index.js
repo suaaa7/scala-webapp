@@ -31,4 +31,3 @@ Dropzone.options.filedropzone = {
 $(function () {
   $('.button-collapse').sideNav();
 });
-
