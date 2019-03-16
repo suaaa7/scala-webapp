@@ -1,8 +1,30 @@
-scala_webapp:
-  container_name: scala_webapp
-  build: .
-  volumes:
-    - ../scala_webapp:/opt/scala
-  ports:
-    - "9000:9000" 
-  tty: true
+version: '3'
+services:
+  scala_webapp:
+    depends_on:
+      - db
+      - redis
+    container_name: scala_webapp
+    build: .
+    volumes:
+      - ../scala_webapp:/opt/scala
+    ports:
+      - "9000:9000" 
+    tty: true
+  db:
+    image: mysql:5.7
+    container_name: mojipic-mysql
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: mojipic
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./datastore:/var/lib/mysql
+  redis:
+    image: redis:4.0.1
+    container_name: mojipic-redis
+    ports:
+      - "6379:6379"

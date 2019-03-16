@@ -8,3 +8,6 @@ target/
 # nodejs
 node_modules
 
+# mysql
+datastore/
+
