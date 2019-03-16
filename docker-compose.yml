@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   scala_webapp:
     depends_on:
@@ -14,7 +14,6 @@ services:
   db:
     image: mysql:5.7
     container_name: mojipic-mysql
-    restart: always
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: mysql
@@ -22,7 +21,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./datastore:/var/lib/mysql
+      - type: bind
+        source: ./datastore
+        target: /var/log/mysql
   redis:
     image: redis:4.0.1
     container_name: mojipic-redis
