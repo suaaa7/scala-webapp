@@ -6,4 +6,3 @@ package domain.entity
   * @param value Twitter IDの値
   */
 case class TwitterId(value: Long)
-

@@ -5,4 +5,3 @@ package domain.entity
   * @param value 画像IDの値
   */
 case class PictureId(value: Long)
-
