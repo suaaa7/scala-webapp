@@ -19,4 +19,3 @@ create table picture_properties(
 # --- !Downs
 
 drop table picture_properties;
-

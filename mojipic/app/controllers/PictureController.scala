@@ -5,7 +5,10 @@ import java.time.{Clock, LocalDateTime}
 import javax.inject.{Inject, Singleton}
 
 import com.google.common.net.MediaType
+import com.redis.RedisClient
 import domain.entity.PictureProperty
+import domain.repository.PicturePropertyRepository
+import infrastructure.redis.RedisKeys
 import play.api.cache._
 import play.api.libs.Files.TemporaryFile
 import play.api.mvc._
@@ -19,6 +22,8 @@ class PicturesController @Inject()(
   clock: Clock,
   executionContext: ExecutionContext,
   val cache: SyncCacheApi,
+  picturePropertyRepository: PicturePropertyRepository,
+  redisClient: RedisClient
 ) extends AbstractController(cc) {
 
   implicit val ec = executionContext
@@ -37,8 +42,11 @@ class PicturesController @Inject()(
             Files.copy(file.ref.path, originalFilepath, StandardCopyOption.COPY_ATTRIBUTES)
             val propertyValue = createPicturePropertyValue(file, form, originalFilepath)
 
-            println(propertyValue)
-            // TODO MySQLへのプロパティ保存とRedisへのタスク保存
+            val pictureId = picturePropertyRepository.create(propertyValue)
+            pictureId.map({ (id) =>
+              redisClient.rpush(RedisKeys.Tasks, id.value)
+              Ok("Picture uploades.")
+            })
 
             Future.successful(Ok("Picture uploaded."))
           case _ => Future.successful(Unauthorized("Need picture data."))
