@@ -7,4 +7,6 @@ import scala.concurrent.Future
 trait PicturePropertyRepository {
   def create(value: PictureProperty.Value): Future[PictureId]
 
+  def find(pictureId: PictureId): Future[PictureProperty]
+
 }
