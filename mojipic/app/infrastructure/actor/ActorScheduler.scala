@@ -9,10 +9,8 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 
 @Singleton
-class ActorScheduler @Inject()(
-  @Name("convert-picture-actor") convertPictureActor: ActorRef,
-  system: ActorSystem
-) {
+class ActorScheduler @Inject()(@Named("convert-picture-actor") convertPictureActor: ActorRef,
+  system: ActorSystem) {
 
   system.scheduler.schedule(0 milliseconds, 500 milliseconds) {
     convertPictureActor ! ConvertPictureMessage

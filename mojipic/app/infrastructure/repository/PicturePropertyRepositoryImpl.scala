@@ -1,7 +1,7 @@
 package infrastructure.repository
 
 import domain.entity.{PictureId, PictureProperty}
-import com.google.common.nent.MediaType
+import com.google.common.net.MediaType
 import domain.entity.{PictureId, PictureProperty, TwitterId}
 import domain.repository.PicturePropertyRepository
 import scalikejdbc._

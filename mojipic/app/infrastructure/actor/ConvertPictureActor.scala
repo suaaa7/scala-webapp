@@ -1,8 +1,9 @@
 package infrastructure.actor
 
 import java.nio.file.{FileSystems, Files, Path}
-import akka.actor.actor
-import com.google.inject.inject
+import akka.actor.Actor
+import com.google.inject.Inject
+import com.redis.RedisClient
 import domain.entity.{PictureId, PictureProperty}
 import domain.repository.PicturePropertyRepository
 import infrastructure.redis.RedisKeys
@@ -12,13 +13,13 @@ import play.api.Configuration
 import scala.util.{Failure, Success, Try}
 import scala.concurrent.ExecutionContext.Implicits.global
 
-sealed abstruct trait ConvertPictureActorMessage
+sealed abstract trait ConvertPictureActorMessage
 
 case object ConvertPictureMessage extends ConvertPictureActorMessage
 
 class ConvertPictureActor @Inject()(
   redisClient: RedisClient,
-  picturePropertyRepository: PicturePropertyRepository
+  picturePropertyRepository: PicturePropertyRepository,
   configuration: Configuration
 ) extends Actor {
 
@@ -36,7 +37,7 @@ class ConvertPictureActor @Inject()(
       val pictureProperty = pictureId.map(id => picturePropertyRepository.find(id))
       pictureProperty match {
         case Some(f) => f.foreach(p => convert(p, picturePropertyRepository))
-        case None    => // ignore Logger.info("Tasks queue is empty.")
+        case None    => Logger.info("Tasks queue is empty.")
       }
     }
   }
@@ -52,7 +53,6 @@ class ConvertPictureActor @Inject()(
         pictureProperty.value
           .copy(status = PictureProperty.Status.Success,
             convertedFilepath = Some(filepath.toString))
-          )
       )
       case Failure(t) => {
         Logger.error("Fail to convert.", t)
@@ -74,7 +74,7 @@ class ConvertPictureActor @Inject()(
     op.pointsize(property.value.overlayTextSize)
     op.stroke("#000C")
     op.strokewidth(2)
-    op.strokewidth(0, 0, 0, 0, property.value.overlayText)
+    op.annotate(0, 0, 0, 0, property.value.overlayText)
     op.stroke("none")
     op.fill("white")
     op.annotate(0, 0, 0, 0, property.value.overlayText)
