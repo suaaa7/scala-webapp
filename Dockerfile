@@ -1,5 +1,9 @@
 FROM centos:7
 
+# ImageMagick
+RUN yum -y install fftw3 libxt libtool-ltdl
+RUN yum -y install ImageMagick
+
 # JVM
 RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
