@@ -53,7 +53,7 @@ class PicturePropertyRepositoryImpl extends PicturePropertyRepository {
                  | content_type,
                  | overlay_text,
                  | overlay_text_size,
-                 | originam_filepath,
+                 | original_filepath,
                  | converted_filepath,
                  | created_time
                  | FROM picture_properties WHERE picture_id = ${pictureId.value}
