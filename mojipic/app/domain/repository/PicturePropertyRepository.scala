@@ -11,4 +11,6 @@ trait PicturePropertyRepository {
 
   def update(pictureId: PictureId, value: PictureProperty.Value): Future[Unit]
 
+  def findAllbyDateTime(lastCreatedTime: LocalDateTime): Future[Seq[PictureProperty]]
+
 }

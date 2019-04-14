@@ -2,6 +2,9 @@ package domain.entity
 
 import java.time.LocalDateTime
 import com.google.common.net.MediaType
+import play.api.libs.json.JsString
+import play.api.libs.json.Json
+import play.api.libs.json.Writes
 
 /**
   * 画像のプロパティ
@@ -38,6 +41,7 @@ object PictureProperty {
         case _ => None
       }
 
+    implicit val writes: Writes[Status] (s => JsString(s.toString))
   }
 
   /**
@@ -62,4 +66,10 @@ object PictureProperty {
                     createdTime: LocalDateTime
                   )
 
+  object Value {
+    implicit val mediaTypeWrites: Writes[MediaType] = Writes(s => JsString(s.toString))
+    implicit val writes: Writes[Value] = Json.writes[Value]
+  }
+
+  implicit val writes: Writes[PictureProperty] = Json.writes[PictureProperty]
 }
