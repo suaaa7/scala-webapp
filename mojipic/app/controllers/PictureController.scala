@@ -86,8 +86,9 @@ class PicturesController @Inject()(
           val file = new File(convertedFilepath)
           val source = FileIO.fromPath(file.toPath)
           Result(
-            header = ResponseHeader(200, Map.empty)
-            body = HttpEntity.Streamed(source, None, Some(pictureProperty.value.contentType.toString))
+            header = ResponseHeader(200, Map.empty),
+            body = HttpEntity.Streamed(
+              source, None, Some(pictureProperty.value.contentType.toString))
           )
         }
         case None => NotFound

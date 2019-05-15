@@ -1,5 +1,7 @@
 package domain.repository
 
+import java.time.LocalDateTime
+
 import domain.entity.{PictureId, PictureProperty}
 
 import scala.concurrent.Future
@@ -11,6 +13,6 @@ trait PicturePropertyRepository {
 
   def update(pictureId: PictureId, value: PictureProperty.Value): Future[Unit]
 
-  def findAllbyDateTime(lastCreatedTime: LocalDateTime): Future[Seq[PictureProperty]]
+  def findAllByDateTime(lastCreatedTime: LocalDateTime): Future[Seq[PictureProperty]]
 
 }

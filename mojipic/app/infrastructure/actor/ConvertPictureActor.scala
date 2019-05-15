@@ -56,8 +56,8 @@ class ConvertPictureActor @Inject()(
       )
       case Failure(t) => {
         Logger.error("Fail to convert.", t)
-        PictureProperty(pictureProperty.id, pictureProperty.value
-          .copy(status = PictureProperty.Status.Failure))
+        PictureProperty(pictureProperty.id, pictureProperty.value.copy(
+          status = PictureProperty.Status.Failure))
       }
     }
 
@@ -67,7 +67,7 @@ class ConvertPictureActor @Inject()(
     ).onComplete {
       case Success(_) => Logger.info(
         s"Converted and updated. convertedPictureProperty: ${convertedPictureProperty}")
-      case Failure(_) => Logger.error("Fail to Update.", t)
+      case Failure(t) => Logger.error("Fail to Update.", t)
     }
   }
 

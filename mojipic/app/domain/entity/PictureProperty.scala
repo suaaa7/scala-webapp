@@ -41,7 +41,7 @@ object PictureProperty {
         case _ => None
       }
 
-    implicit val writes: Writes[Status] (s => JsString(s.toString))
+    implicit val writes: Writes[Status] = Writes(s => JsString(s.toString))
   }
 
   /**
